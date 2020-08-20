@@ -1,0 +1,19 @@
+.home-bg-image {
+    background: url('src/assets/InSight-bg.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.text-white {
+    color: #fff;
+}
