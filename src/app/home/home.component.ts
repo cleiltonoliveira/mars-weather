@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SolService } from '../services/sol.service';
-import { getLocaleDateFormat } from '@angular/common';
 import { Sol } from '../model/sol';
-import { CompileShallowModuleMetadata } from '@angular/compiler';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,12 +10,12 @@ export class HomeComponent implements OnInit {
 
   sols: Array<Sol> = [];
 
+  isCelsiusActive: boolean = true;
+
   constructor(private solService: SolService) { }
 
   ngOnInit(): void {
-
     this.getData();
-    // this.showData(this.getData());
   }
 
   getData() {
@@ -33,10 +30,33 @@ export class HomeComponent implements OnInit {
     return this.sols;
   }
 
-  showData(sols: Array<Sol>) {
+  toCelsius() {
 
+    if (!this.isCelsiusActive) {
+      this.isCelsiusActive = true;
 
+      this.sols.map(value => {
+        let mn = value.AT.mn;
+        let mx = value.AT.mx;
 
-
+        value.AT.mn = (mn - 32) / 1.8;
+        value.AT.mx = (mx - 32) / 1.8;
+      })
+    }
   }
+
+  toFahrenheit() {
+    if (this.isCelsiusActive) {
+      this.isCelsiusActive = false;
+
+      this.sols.map(value => {
+        let mn = value.AT.mn;
+        let mx = value.AT.mx;
+
+        value.AT.mn = mn * 1.8 + 32;
+        value.AT.mx = mx * 1.8 + 32;
+      });
+    }
+  }
+
 }

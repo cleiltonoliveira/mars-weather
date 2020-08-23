@@ -41,12 +41,16 @@
     font-size: 1rem;
 }
 
+.little-opaque{
+    opacity: 50%;
+}
+
 @media (min-width: 320px) {
     .text-large {
         font-size: 1.4rem;
     }
     .text-larger {
-        font-size: 1.8rem;
+        font-size: 1.8rem;  
     }
     .text-small {
         font-size: 1.1rem;

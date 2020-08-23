@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
-import { Sol } from '../model/sol';
 
 @Injectable({
   providedIn: 'root'
