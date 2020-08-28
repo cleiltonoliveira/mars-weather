@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SolService } from '../services/sol.service';
 import { Sol } from '../model/sol';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   sols: Array<Sol> = [];
-
   isCelsiusActive: boolean = true;
+  subscription: Subscription;
 
   constructor(private solService: SolService) { }
 
@@ -18,8 +19,12 @@ export class HomeComponent implements OnInit {
     this.getData();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   getData() {
-    this.solService.getData().subscribe(v => v.sol_keys.map(
+    this.subscription = this.solService.getData().subscribe(v => v.sol_keys.map(
       k => {
         let sol: Sol = v[k];
         sol.key = k;
